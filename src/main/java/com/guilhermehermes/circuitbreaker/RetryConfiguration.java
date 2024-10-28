@@ -1,4 +1,4 @@
-package com.guilhermehermes.circuitbreaker.CB;
+package com.guilhermehermes.circuitbreaker;
 
 import io.github.resilience4j.retry.RetryConfig;
 import org.springframework.context.annotation.Bean;
