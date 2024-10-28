@@ -1,4 +1,4 @@
-package com.guilhermehermes.circuitbreaker;
+package com.guilhermehermes.circuitbreaker.CB;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

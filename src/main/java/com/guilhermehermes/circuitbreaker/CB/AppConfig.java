@@ -1,4 +1,4 @@
-package com.guilhermehermes.circuitbreaker;
+package com.guilhermehermes.circuitbreaker.CB;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

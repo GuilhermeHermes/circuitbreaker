@@ -1,4 +1,4 @@
-package com.guilhermehermes.circuitbreaker;
+package com.guilhermehermes.circuitbreaker.CB;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import org.springframework.context.annotation.Bean;

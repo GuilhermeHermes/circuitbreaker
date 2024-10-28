@@ -1,4 +1,4 @@
-package com.guilhermehermes.circuitbreaker;
+package com.guilhermehermes.circuitbreaker.CB;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
