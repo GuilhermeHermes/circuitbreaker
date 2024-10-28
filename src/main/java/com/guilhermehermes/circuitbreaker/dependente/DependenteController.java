@@ -17,22 +17,17 @@ public class DependenteController {
     private AtomicInteger falhaCount = new AtomicInteger(0);
     private static final int FALHAS_ANTES_RECUPERACAO = 2;
     private final RateLimiter rateLimiter;
+    private final RateLimiterRegistry registry;
 
-    public DependenteController() {
-        // Configuração do Rate Limiter
-        RateLimiterConfig config = RateLimiterConfig.custom()
-                .limitForPeriod(1)                     // Número de chamadas permitidas
-                .limitRefreshPeriod(Duration.ofSeconds(2)) // Período de refresh
-                .timeoutDuration(Duration.ofMillis(500))   // Timeout para aguardar permissão
-                .build();
-
-        RateLimiterRegistry registry = RateLimiterRegistry.of(config);
+    public DependenteController(RateLimiterRegistry registry) {
+        this.registry = registry;
         this.rateLimiter = registry.rateLimiter("dependenteService");
 
         // Configurando listeners de eventos
         rateLimiter.getEventPublisher()
                 .onSuccess(event -> System.out.println("Rate limit: Chamada permitida"))
-                .onFailure(event -> System.out.println("Rate limit: Chamada rejeitada"));}
+                .onFailure(event -> System.out.println("Rate limit: Chamada rejeitada"));
+    }
 
     @GetMapping("/api/dependente")
     public ResponseEntity<ServiceResponse> servicoDependente() {

@@ -11,13 +11,15 @@ import java.time.Duration;
 @Configuration
 public class RateLimitConfig {
 
+    RateLimiterConfig config = RateLimiterConfig.custom()
+            .limitForPeriod(1)                     // Número de chamadas permitidas
+            .limitRefreshPeriod(Duration.ofSeconds(2)) // Período de refresh
+            .timeoutDuration(Duration.ofMillis(500))   // Timeout para aguardar permissão
+            .build();
+
     @Bean
     public RateLimiter dependenteServiceRateLimiter() {
-        RateLimiterConfig config = RateLimiterConfig.custom()
-                .limitForPeriod(5)
-                .limitRefreshPeriod(Duration.ofSeconds(1))
-                .timeoutDuration(Duration.ofMillis(100))
-                .build();
+
 
         return RateLimiterRegistry.of(config)
                 .rateLimiter("dependenteService");
@@ -25,6 +27,6 @@ public class RateLimitConfig {
 
     @Bean
     public RateLimiterRegistry rateLimiterRegistry() {
-        return RateLimiterRegistry.ofDefaults();
+        return RateLimiterRegistry.of(config);
     }
 }
